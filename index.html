@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sailing Summer Diary</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:'Inter', sans-serif;
+      background:#FAFAF7;
+      color:#0E3B66;
+      overflow-x:hidden;
+    }
+
+    :root{
+      --ocean:#0E3B66;
+      --sky:#DCEFFD;
+      --white:#FAFAF7;
+      --sand:#F3E7D3;
+    }
+
+    section{
+      position:relative;
+      padding:120px 10%;
+    }
+
+    h1,h2{
+      font-family:'Caveat', cursive;
+      letter-spacing:1px;
+    }
+
+    p{
+      line-height:1.8;
+      font-size:1.05rem;
+      color:#244866;
+    }
+
+    /* HERO */
+
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      background:
+        linear-gradient(rgba(14,59,102,0.45), rgba(14,59,102,0.45)),
+        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80');
+      background-size:cover;
+      background-position:center;
+      color:white;
+    }
+
+    .hero-content{
+      max-width:900px;
+      animation:fadeUp 1.4s ease;
+    }
+
+    .hero h1{
+      font-size:clamp(4rem, 8vw, 7rem);
+      margin-bottom:20px;
+    }
+
+    .hero p{
+      color:white;
+      font-size:1.2rem;
+      max-width:700px;
+      margin:auto;
+      font-weight:300;
+    }
+
+    .scroll-btn{
+      margin-top:50px;
+      display:inline-block;
+      padding:14px 30px;
+      border:1px solid rgba(255,255,255,0.6);
+      border-radius:50px;
+      color:white;
+      text-decoration:none;
+      transition:0.4s;
+      backdrop-filter:blur(6px);
+    }
+
+    .scroll-btn:hover{
+      background:white;
+      color:var(--ocean);
+    }
+
+    /* WAVES */
+
+    .wave{
+      position:absolute;
+      bottom:-1px;
+      left:0;
+      width:100%;
+      overflow:hidden;
+      line-height:0;
+    }
+
+    .wave svg{
+      display:block;
+      width:calc(100% + 1.3px);
+      height:110px;
+    }
+
+    /* STORY SECTION */
+
+    .story{
+      background:var(--white);
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:80px;
+      align-items:center;
+    }
+
+    .story img{
+      width:100%;
+      height:600px;
+      object-fit:cover;
+      border-radius:30px;
+      box-shadow:0 25px 60px rgba(0,0,0,0.12);
+    }
+
+    .story h2{
+      font-size:4rem;
+      margin-bottom:20px;
+    }
+
+    /* MEMORIES */
+
+    .memories{
+      background:var(--sky);
+      text-align:center;
+    }
+
+    .memories h2{
+      font-size:4rem;
+      margin-bottom:20px;
+    }
+
+    .cards{
+      margin-top:70px;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:30px;
+    }
+
+    .card{
+      background:rgba(255,255,255,0.7);
+      padding:35px;
+      border-radius:30px;
+      backdrop-filter:blur(10px);
+      transition:0.4s ease;
+      box-shadow:0 10px 30px rgba(0,0,0,0.06);
+    }
+
+    .card:hover{
+      transform:translateY(-10px);
+    }
+
+    .card h3{
+      margin-bottom:15px;
+      font-size:1.4rem;
+    }
+
+    /* GALLERY */
+
+    .gallery{
+      background:var(--sand);
+      text-align:center;
+    }
+
+    .gallery h2{
+      font-size:4rem;
+      margin-bottom:60px;
+    }
+
+    .gallery-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px;
+    }
+
+    .gallery-grid img{
+      width:100%;
+      height:320px;
+      object-fit:cover;
+      border-radius:24px;
+      transition:0.5s;
+      box-shadow:0 12px 25px rgba(0,0,0,0.08);
+    }
+
+    .gallery-grid img:hover{
+      transform:scale(1.03);
+    }
+
+    /* FINAL */
+
+    .final{
+      background:var(--ocean);
+      color:white;
+      text-align:center;
+      padding:150px 10%;
+    }
+
+    .final h2{
+      font-size:5rem;
+      margin-bottom:20px;
+    }
+
+    .final p{
+      color:rgba(255,255,255,0.85);
+      max-width:700px;
+      margin:auto;
+    }
+
+    footer{
+      margin-top:60px;
+      opacity:0.7;
+      font-size:0.9rem;
+    }
+
+    /* ANIMATIONS */
+
+    @keyframes fadeUp{
+      from{
+        opacity:0;
+        transform:translateY(40px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    .reveal{
+      opacity:0;
+      transform:translateY(40px);
+      transition:1s ease;
+    }
+
+    .reveal.active{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    /* RESPONSIVE */
+
+    @media(max-width:900px){
+
+      section{
+        padding:90px 8%;
+      }
+
+      .story{
+        grid-template-columns:1fr;
+      }
+
+      .story img{
+        height:450px;
+      }
+
+      .hero h1{
+        font-size:4.5rem;
+      }
+
+      .story h2,
+      .memories h2,
+      .gallery h2,
+      .final h2{
+        font-size:3rem;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+      <h1>Summer Under Sail</h1>
+
+      <p>
+        A story made of salty skin, endless sunsets, laughter on the docks,
+        and nights where the sea felt bigger than the world itself.
+      </p>
+
+      <a href="#story" class="scroll-btn">Start the Journey</a>
+    </div>
+
+    <div class="wave">
+      <svg viewBox="0 0 1440 320">
+        <path fill="#FAFAF7" fill-opacity="1"
+          d="M0,192L60,202.7C120,213,240,235,360,224C480,213,600,171,720,165.3C840,160,960,192,1080,213.3C1200,235,1320,245,1380,250.7L1440,256L1440,320L0,320Z">
+        </path>
+      </svg>
+    </div>
+
+  </section>
+
+  <!-- STORY -->
+
+  <section class="story reveal" id="story">
+
+    <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1000&q=80" alt="Sailing Camp">
+
+    <div>
+      <h2>The Summer That Changed Me</h2>
+
+      <p>
+        Every morning began with the sound of waves and the smell of salt in the air.
+        We learned how to sail, how to trust the wind, and somehow,
+        how to trust each other too.
+      </p>
+
+      <br>
+
+      <p>
+        Between races, sunburnt afternoons, shared meals,
+        and conversations under the stars,
+        strangers slowly became family.
+      </p>
+    </div>
+
+  </section>
+
+  <!-- MEMORIES -->
+
+  <section class="memories reveal">
+
+    <h2>Moments I'll Never Forget</h2>
+
+    <div class="cards">
+
+      <div class="card">
+        <h3>⛵ First Departure</h3>
+        <p>
+          The excitement of leaving the harbor for the very first time,
+          with the wind finally filling the sails.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🌅 Golden Sunsets</h3>
+        <p>
+          Evenings painted in orange and pink while the sea reflected every color of summer.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>🌊 Midnight Talks</h3>
+        <p>
+          Sitting near the beach at night, talking for hours while listening to the waves.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- GALLERY -->
+
+  <section class="gallery reveal">
+
+    <h2>Fragments of Freedom</h2>
+
+    <div class="gallery-grid">
+
+      <img src="https://images.unsplash.com/photo-1493558103817-58b2924bce98?auto=format&fit=crop&w=800&q=80" alt="">
+      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="">
+      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="">
+      <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=800&q=80" alt="">
+
+    </div>
+
+  </section>
+
+  <!-- FINAL -->
+
+  <section class="final reveal">
+
+    <h2>Some Summers Stay Forever</h2>
+
+    <p>
+      Maybe it was the sea, maybe the freedom,
+      or maybe the people who shared those days with me.
+      But part of me is still there,
+      somewhere between the wind and the horizon.
+    </p>
+
+    <footer>
+      Sailing Camp Diary • Summer 2026
+    </footer>
+
+  </section>
+
+  <script>
+    const reveals = document.querySelectorAll(".reveal");
+
+    window.addEventListener("scroll", () => {
+      reveals.forEach(section => {
+        const top = section.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+
+        if(top < windowHeight - 100){
+          section.classList.add("active");
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
