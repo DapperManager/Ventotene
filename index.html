@@ -1,433 +1,276 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sailing Summer Diary</title>
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-  <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
-
-    html{
-      scroll-behavior:smooth;
-    }
-
-    body{
-      font-family:'Inter', sans-serif;
-      background:#FAFAF7;
-      color:#0E3B66;
-      overflow-x:hidden;
-    }
-
-    :root{
-      --ocean:#0E3B66;
-      --sky:#DCEFFD;
-      --white:#FAFAF7;
-      --sand:#F3E7D3;
-    }
-
-    section{
-      position:relative;
-      padding:120px 10%;
-    }
-
-    h1,h2{
-      font-family:'Caveat', cursive;
-      letter-spacing:1px;
-    }
-
-    p{
-      line-height:1.8;
-      font-size:1.05rem;
-      color:#244866;
-    }
-
-    /* HERO */
-
-    .hero{
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      text-align:center;
-      background:
-        linear-gradient(rgba(14,59,102,0.45), rgba(14,59,102,0.45)),
-        url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1600&q=80');
-      background-size:cover;
-      background-position:center;
-      color:white;
-    }
-
-    .hero-content{
-      max-width:900px;
-      animation:fadeUp 1.4s ease;
-    }
-
-    .hero h1{
-      font-size:clamp(4rem, 8vw, 7rem);
-      margin-bottom:20px;
-    }
-
-    .hero p{
-      color:white;
-      font-size:1.2rem;
-      max-width:700px;
-      margin:auto;
-      font-weight:300;
-    }
-
-    .scroll-btn{
-      margin-top:50px;
-      display:inline-block;
-      padding:14px 30px;
-      border:1px solid rgba(255,255,255,0.6);
-      border-radius:50px;
-      color:white;
-      text-decoration:none;
-      transition:0.4s;
-      backdrop-filter:blur(6px);
-    }
-
-    .scroll-btn:hover{
-      background:white;
-      color:var(--ocean);
-    }
-
-    /* WAVES */
-
-    .wave{
-      position:absolute;
-      bottom:-1px;
-      left:0;
-      width:100%;
-      overflow:hidden;
-      line-height:0;
-    }
-
-    .wave svg{
-      display:block;
-      width:calc(100% + 1.3px);
-      height:110px;
-    }
-
-    /* STORY SECTION */
-
-    .story{
-      background:var(--white);
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:80px;
-      align-items:center;
-    }
-
-    .story img{
-      width:100%;
-      height:600px;
-      object-fit:cover;
-      border-radius:30px;
-      box-shadow:0 25px 60px rgba(0,0,0,0.12);
-    }
-
-    .story h2{
-      font-size:4rem;
-      margin-bottom:20px;
-    }
-
-    /* MEMORIES */
-
-    .memories{
-      background:var(--sky);
-      text-align:center;
-    }
-
-    .memories h2{
-      font-size:4rem;
-      margin-bottom:20px;
-    }
-
-    .cards{
-      margin-top:70px;
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:30px;
-    }
-
-    .card{
-      background:rgba(255,255,255,0.7);
-      padding:35px;
-      border-radius:30px;
-      backdrop-filter:blur(10px);
-      transition:0.4s ease;
-      box-shadow:0 10px 30px rgba(0,0,0,0.06);
-    }
-
-    .card:hover{
-      transform:translateY(-10px);
-    }
-
-    .card h3{
-      margin-bottom:15px;
-      font-size:1.4rem;
-    }
-
-    /* GALLERY */
-
-    .gallery{
-      background:var(--sand);
-      text-align:center;
-    }
-
-    .gallery h2{
-      font-size:4rem;
-      margin-bottom:60px;
-    }
-
-    .gallery-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-      gap:20px;
-    }
-
-    .gallery-grid img{
-      width:100%;
-      height:320px;
-      object-fit:cover;
-      border-radius:24px;
-      transition:0.5s;
-      box-shadow:0 12px 25px rgba(0,0,0,0.08);
-    }
-
-    .gallery-grid img:hover{
-      transform:scale(1.03);
-    }
-
-    /* FINAL */
-
-    .final{
-      background:var(--ocean);
-      color:white;
-      text-align:center;
-      padding:150px 10%;
-    }
-
-    .final h2{
-      font-size:5rem;
-      margin-bottom:20px;
-    }
-
-    .final p{
-      color:rgba(255,255,255,0.85);
-      max-width:700px;
-      margin:auto;
-    }
-
-    footer{
-      margin-top:60px;
-      opacity:0.7;
-      font-size:0.9rem;
-    }
-
-    /* ANIMATIONS */
-
-    @keyframes fadeUp{
-      from{
-        opacity:0;
-        transform:translateY(40px);
-      }
-      to{
-        opacity:1;
-        transform:translateY(0);
-      }
-    }
-
-    .reveal{
-      opacity:0;
-      transform:translateY(40px);
-      transition:1s ease;
-    }
-
-    .reveal.active{
-      opacity:1;
-      transform:translateY(0);
-    }
-
-    /* RESPONSIVE */
-
-    @media(max-width:900px){
-
-      section{
-        padding:90px 8%;
-      }
-
-      .story{
-        grid-template-columns:1fr;
-      }
-
-      .story img{
-        height:450px;
-      }
-
-      .hero h1{
-        font-size:4.5rem;
-      }
-
-      .story h2,
-      .memories h2,
-      .gallery h2,
-      .final h2{
-        font-size:3rem;
-      }
-    }
-
-  </style>
-</head>
-
-<body>
-
-  <!-- HERO -->
-
-  <section class="hero">
-
-    <div class="hero-content">
-      <h1>Summer Under Sail</h1>
-
-      <p>
-        A story made of salty skin, endless sunsets, laughter on the docks,
-        and nights where the sea felt bigger than the world itself.
-      </p>
-
-      <a href="#story" class="scroll-btn">Start the Journey</a>
-    </div>
-
-    <div class="wave">
-      <svg viewBox="0 0 1440 320">
-        <path fill="#FAFAF7" fill-opacity="1"
-          d="M0,192L60,202.7C120,213,240,235,360,224C480,213,600,171,720,165.3C840,160,960,192,1080,213.3C1200,235,1320,245,1380,250.7L1440,256L1440,320L0,320Z">
-        </path>
-      </svg>
-    </div>
-
-  </section>
-
-  <!-- STORY -->
-
-  <section class="story reveal" id="story">
-
-    <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=1000&q=80" alt="Sailing Camp">
-
-    <div>
-      <h2>The Summer That Changed Me</h2>
-
-      <p>
-        Every morning began with the sound of waves and the smell of salt in the air.
-        We learned how to sail, how to trust the wind, and somehow,
-        how to trust each other too.
-      </p>
-
-      <br>
-
-      <p>
-        Between races, sunburnt afternoons, shared meals,
-        and conversations under the stars,
-        strangers slowly became family.
-      </p>
-    </div>
-
-  </section>
-
-  <!-- MEMORIES -->
-
-  <section class="memories reveal">
-
-    <h2>Moments I'll Never Forget</h2>
-
-    <div class="cards">
-
-      <div class="card">
-        <h3>⛵ First Departure</h3>
-        <p>
-          The excitement of leaving the harbor for the very first time,
-          with the wind finally filling the sails.
-        </p>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Campo Velico</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+
+  <body>
+<!-- INTRO ANIMATION -->
+<div class="intro">
+  <div class="zoom-scene">
+  <div class="intro-grid">
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+    <img src="Logo Intro.png" alt="Logo" class="intro-logo" />
+  </div>
+</div>
+    <div class="bg-overlay"></div>
+    <div class="bubble bubble1"></div>
+    <div class="bubble bubble2"></div>
+    <div class="bubble bubble3"></div>
+
+    <div class="window">
+      <header class="topbar">
+        <div class="logo-section">
+          <div class="logo-glow">&nbsp;</div>
+
+          <div>
+            <h1>CAMPO&nbsp;&nbsp;</h1>
+            <h1>VELICO&nbsp; </h1>
+<p>A cura di Matteo Laraia</p>
+          </div>
+        </div>
+
+        <nav>
+          <a href="#">STORIA&nbsp;</a>
+          <a href="#">ARCHITETTURA</a>
+          <a href="#">AERO</a>
+          <a href="#">FUTURO</a>
+        </nav>
+      </header>
+
+      <div class="layout">
+
+        <main>
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+<div class="hero-glow"></div>
+
+<h2>FRUTIGER AERO</h2>
+
+<h3>Il futuro eco-tecnologico immaginato dagli anni 2000</h3>
+
+<p>
+Il Frutiger Aero è un’estetica diffusa tra il 2004 e il 2013 che unisce
+tecnologia, natura, vetro, luce e sostenibilità.
+Nato durante l’ottimismo digitale dei primi anni 2000,
+rappresentava un futuro armonioso tra uomo e tecnologia.
+</p>
+
+</section>
+
+<!-- ORIGINI -->
+
+<section class="immersive-section" id="origini">
+
+<div class="section-text">
+
+<h2>ORIGINI</h2>
+
+<p>
+Il Frutiger Aero nasce nei primi anni 2000 con la diffusione di internet,
+dei computer moderni e dell’ottimismo tecnologico.
+La società immaginava un futuro sostenibile dove natura e tecnologia convivessero armoniosamente.
+</p>
+
+<p>
+Per questo compaiono vetro, acqua, cieli azzurri,
+superfici lucide, curve morbide e design eco-tecnologico.
+</p>
+
+</div>
+
+<div class="section-image">
+
+<img src="https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1400&auto=format&fit=crop">
+
+</div>
+
+</section>
+
+<!-- ARCHITETTURA -->
+
+<section class="section-title" id="architettura">
+
+<h2>ARCHITETTURA</h2>
+
+<p>
+Edifici fluidi, sostenibili e luminosi che rappresentano
+l’immaginario futuristico dei primi anni 2000.
+</p>
+
+</section>
+
+<section class="card large-card">
+
+<img src="https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=1200&auto=format&fit=crop">
+
+<div class="card-text">
+
+<h3>HEYDAR ALIYEV CENTER</h3>
+
+<h4>Zaha Hadid</h4>
+
+<p>
+Edificio fluido e dinamico con superfici bianche continue
+che sembrano modellate dal vento e dall’acqua.
+</p>
+
+</div>
+
+</section>
+
+<section class="card large-card">
+
+<img src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?q=80&w=1200&auto=format&fit=crop">
+
+<div class="card-text">
+
+<h3>GARDENS BY THE BAY</h3>
+
+<p>
+Unione tra natura artificiale, sostenibilità e tecnologia futuristica.
+</p>
+
+</div>
+
+</section>
+
+<section class="card large-card">
+
+<img src="https://images.unsplash.com/photo-1479839672679-a46483c0e7c8?q=80&w=1200&auto=format&fit=crop">
+
+<div class="card-text">
+
+<h3>AQUA TOWER</h3>
+
+<p>
+Grattacielo ispirato al movimento dell’acqua
+con balconi ondulati e organici.
+</p>
+
+</div>
+
+</section>
+
+<section class="card large-card">
+
+<img src="https://images.unsplash.com/photo-1518005020951-eccb494ad742?q=80&w=1200&auto=format&fit=crop">
+
+<div class="card-text">
+
+<h3>MUSEU DO AMANHÃ</h3>
+
+<p>
+Museo futuristico dedicato alla sostenibilità
+e al futuro dell’umanità.
+</p>
+
+</div>
+
+</section>
+
+<section class="card large-card">
+
+<img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=1200&auto=format&fit=crop">
+
+<div class="card-text">
+
+<h3>SONGDO SMART CITY</h3>
+
+<p>
+Città intelligente costruita per rappresentare
+un futuro sostenibile e tecnologico.
+</p>
+
+</div>
+
+</section>
+
+<!-- DESIGN -->
+
+<section class="section-title" id="design">
+
+<h2>DESIGN</h2>
+
+<p>
+Tecnologia resa più umana attraverso trasparenze,
+luci morbide e superfici accessibili.
+</p>
+
+</section>
+
+<div class="design-grid">
+
+<div class="design-card">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/7/7b/IMac_G3_Bondi_Blue%2C_graphite%2C_flower_power%2C_indigo.jpg">
+
+<h3>iMac G3</h3>
+
+</div>
+
+<div class="design-card">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Sony_Vaio.jpg">
+
+<h3>Sony VAIO</h3>
+
+</div>
+
+<div class="design-card">
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/0/03/Xbox-360-Pro-wController.jpg">
+
+<h3>Xbox 360</h3>
+
+</div>
+
+</div>
+
+<!-- RITORNO -->
+
+<section class="return-section" id="ritorno">
+
+<h2>IL RITORNO DEL FRUTIGER AERO</h2>
+
+<p>
+Negli anni 2020 il Frutiger Aero ritorna grazie alla nostalgia online.
+Molti giovani vedono questa estetica come il simbolo
+di un futuro più positivo e meno freddo rispetto alla tecnologia moderna.
+</p>
+
+</section>
+
+<!-- FINALE -->
+
+<section class="final-section">
+
+<h2>
+“Il Frutiger Aero non rappresenta solo un’estetica.”
+</h2>
+
+<p>
+Rappresenta il sogno di un futuro dove uomo,
+natura e tecnologia convivono armoniosamente.
+</p>
+
+</section>
+        </main>
       </div>
-
-      <div class="card">
-        <h3>🌅 Golden Sunsets</h3>
-        <p>
-          Evenings painted in orange and pink while the sea reflected every color of summer.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>🌊 Midnight Talks</h3>
-        <p>
-          Sitting near the beach at night, talking for hours while listening to the waves.
-        </p>
-      </div>
-
     </div>
-
-  </section>
-
-  <!-- GALLERY -->
-
-  <section class="gallery reveal">
-
-    <h2>Fragments of Freedom</h2>
-
-    <div class="gallery-grid">
-
-      <img src="https://images.unsplash.com/photo-1493558103817-58b2924bce98?auto=format&fit=crop&w=800&q=80" alt="">
-      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="">
-      <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="">
-      <img src="https://images.unsplash.com/photo-1519046904884-53103b34b206?auto=format&fit=crop&w=800&q=80" alt="">
-
-    </div>
-
-  </section>
-
-  <!-- FINAL -->
-
-  <section class="final reveal">
-
-    <h2>Some Summers Stay Forever</h2>
-
-    <p>
-      Maybe it was the sea, maybe the freedom,
-      or maybe the people who shared those days with me.
-      But part of me is still there,
-      somewhere between the wind and the horizon.
-    </p>
-
-    <footer>
-      Sailing Camp Diary • Summer 2026
-    </footer>
-
-  </section>
-
-  <script>
-    const reveals = document.querySelectorAll(".reveal");
-
-    window.addEventListener("scroll", () => {
-      reveals.forEach(section => {
-        const top = section.getBoundingClientRect().top;
-        const windowHeight = window.innerHeight;
-
-        if(top < windowHeight - 100){
-          section.classList.add("active");
-        }
-      });
-    });
-  </script>
-
-</body>
+  </body>
 </html>
