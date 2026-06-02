@@ -310,10 +310,10 @@ main {
     transform: scale(0.5); /* Piccolo rinculo per prendere slancio */
   }
   70% { 
-    transform: scale(150); /* Zoom estremo x150: il buco diventa gigante e ci entriamo! */  
+    transform: scale(250); /* Zoom estremo x150: il buco diventa gigante e ci entriamo! */  
   }
   100% { 
-    transform: scale(150); /* Zoom estremo x150: il buco diventa gigante e ci entriamo! */  
+    transform: scale(250); /* Zoom estremo x150: il buco diventa gigante e ci entriamo! */  
   }
 }
 
