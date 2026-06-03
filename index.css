@@ -236,7 +236,13 @@ main {
   border-radius: 22px;
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
-
+.card img2 {
+  width: 220px;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
 .card-text {
   padding-top: 10px;
   flex: 1;
